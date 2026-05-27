@@ -98,17 +98,27 @@ Every report starts with this wrapper. Replace `{{TITLE}}`, `{{DATE}}`, `{{PROJE
     max-width: 860px;
     margin: 0 auto;
   }
+  html[data-theme="dark"] body { background: #111118; color: #e0e0e8; }
+  html[data-theme="dark"] .report-header { border-bottom-color: #2a2a3a; }
+  html[data-theme="dark"] .card { background: #1a1a24; border-color: #2a2a3a; }
+  html[data-theme="dark"] table { border-color: #2a2a3a; }
+  html[data-theme="dark"] th { background: #1e1e2a; border-color: #2a2a3a; }
+  html[data-theme="dark"] td { border-color: #2a2a3a; }
+  html[data-theme="dark"] code { background: #1e1e2a; }
+  html[data-theme="dark"] .tag { background: #1e1e2a; }
+  html[data-theme="dark"] .muted { color: #888; }
+  html[data-theme="dark"] hr { border-color: #2a2a3a; }
   @media (prefers-color-scheme: dark) {
-    body { background: #111118; color: #e0e0e8; }
-    .report-header { border-bottom-color: #2a2a3a; }
-    .card { background: #1a1a24; border-color: #2a2a3a; }
-    table { border-color: #2a2a3a; }
-    th { background: #1e1e2a; border-color: #2a2a3a; }
-    td { border-color: #2a2a3a; }
-    code { background: #1e1e2a; }
-    .tag { background: #1e1e2a; }
-    .muted { color: #888; }
-    hr { border-color: #2a2a3a; }
+    html:not([data-theme="light"]) body { background: #111118; color: #e0e0e8; }
+    html:not([data-theme="light"]) .report-header { border-bottom-color: #2a2a3a; }
+    html:not([data-theme="light"]) .card { background: #1a1a24; border-color: #2a2a3a; }
+    html:not([data-theme="light"]) table { border-color: #2a2a3a; }
+    html:not([data-theme="light"]) th { background: #1e1e2a; border-color: #2a2a3a; }
+    html:not([data-theme="light"]) td { border-color: #2a2a3a; }
+    html:not([data-theme="light"]) code { background: #1e1e2a; }
+    html:not([data-theme="light"]) .tag { background: #1e1e2a; }
+    html:not([data-theme="light"]) .muted { color: #888; }
+    html:not([data-theme="light"]) hr { border-color: #2a2a3a; }
   }
   .report-header {
     border-bottom: 2px solid #e0e0e8;
