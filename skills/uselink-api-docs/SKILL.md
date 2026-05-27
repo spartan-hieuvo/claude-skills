@@ -137,6 +137,7 @@ Return the URL to the user.
 
 ## Gotchas
 
+- **NEVER set background or color on body, table, th, td, code, or pre.** uselink's viewer injects theme-adaptive CSS that handles light/dark mode automatically. Any hardcoded color in published HTML overrides the viewer's theme and forces a white background in dark mode. Only style layout (padding, margins, borders, border-radius, font-size, grid). Use `opacity` for muted text instead of `color: #888`.
 - **Generate example JSON, don't guess.** Read the actual DTO/model classes to get field names, types, and defaults. Don't invent example values that don't match the schema.
 - **Use snake_case in JSON examples if that's the wire format.** Check the project's serialization config (Jackson SNAKE_CASE, etc.) and match the actual API output.
 - **Skip internal/admin endpoints unless asked.** If the docs are for external consumers, filter out admin-only routes. Ask the user if unclear.

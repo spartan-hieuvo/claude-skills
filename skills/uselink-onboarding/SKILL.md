@@ -183,6 +183,7 @@ Return the URL to the user.
 
 ## Gotchas
 
+- **NEVER set background or color on body, table, th, td, code, or pre.** uselink's viewer injects theme-adaptive CSS that handles light/dark mode automatically. Any hardcoded color in published HTML overrides the viewer's theme and forces a white background in dark mode. Only style layout (padding, margins, borders, border-radius, font-size, grid). Use `opacity` for muted text instead of `color: #888`.
 - **Test the setup commands yourself.** Run the commands you're about to document and verify they work. "Clone, install, run" should be copy-pasteable. If a step requires manual intervention (like `uselink login`), call it out explicitly.
 - **Don't fabricate team members for "Who to Ask."** If you can't determine team members from git blame or README, use placeholder text like "Check git blame" or ask the user.
 - **Environment variables from `.env.example` need real descriptions.** Don't just list the variable names. Read the codebase to understand what each one does and whether it's required or optional.

@@ -139,6 +139,7 @@ Return the URL to the user.
 
 ## Gotchas
 
+- **NEVER set background or color on body, table, th, td, code, or pre.** uselink's viewer injects theme-adaptive CSS that handles light/dark mode automatically. Any hardcoded color in published HTML overrides the viewer's theme and forces a white background in dark mode. Only style layout (padding, margins, borders, border-radius, font-size, grid). Use `opacity` for muted text instead of `color: #888`.
 - **Write for the audience, not the git log.** "Added real-time notifications for comment replies" is better than "feat(notifications): add WebSocket push for DocumentCommentReply events." Translate commit-speak to user-speak.
 - **Highlights section is mandatory.** Even for small releases, pick the top 3 changes. Stakeholders read this first and may skip the rest.
 - **Omit noise commits.** Skip "fix typo", "lint", "merge branch" commits from the changelog. They're git housekeeping, not release content.

@@ -130,6 +130,7 @@ Return the URL to the user.
 
 ## Gotchas
 
+- **NEVER set background or color on body, table, th, td, code, or pre.** uselink's viewer injects theme-adaptive CSS that handles light/dark mode automatically. Any hardcoded color in published HTML overrides the viewer's theme and forces a white background in dark mode. Only style layout (padding, margins, borders, border-radius, font-size, grid). Use `opacity` for muted text instead of `color: #888`.
 - **Write for non-engineers.** The "What Changed" section should use plain English, not code jargon. "Added email verification to signup" not "Added EmailVerificationService injection to AuthManager."
 - **Group by logical change, not by file.** A feature that touches 8 files is ONE bullet in "What Changed" with context, not 8 bullets listing filenames.
 - **PR description might be empty.** Infer the "Why" from commit messages if the PR body is blank. If both are empty, ask the user.

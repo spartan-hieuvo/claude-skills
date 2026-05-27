@@ -80,6 +80,8 @@ Every report starts with this wrapper. Replace `{{TITLE}}`, `{{DATE}}`, `{{PROJE
 
 **HTML-escape all interpolated data.** Commit messages, PR titles, file paths, and findings can contain `<`, `>`, `&`, or quotes that corrupt the HTML or inject markup. Before inserting any repo-sourced string into a template, escape `&` → `&amp;`, `<` → `&lt;`, `>` → `&gt;`, `"` → `&quot;`.
 
+**CRITICAL: Do NOT set `background` or `color` on `body`, `table`, `th`, `code`, or `pre`.** uselink's viewer injects theme-adaptive CSS that handles light/dark mode. Any hardcoded color in the published HTML overrides the viewer's theme and breaks dark mode. Only style layout (padding, margins, borders, border-radius, font-size, grid).
+
 ```html
 <!DOCTYPE html>
 <html lang="en">
@@ -92,69 +94,43 @@ Every report starts with this wrapper. Replace `{{TITLE}}`, `{{DATE}}`, `{{PROJE
   body {
     font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
     line-height: 1.6;
-    color: #1a1a2e;
-    background: #f8f8fc;
     padding: 2rem 1rem;
     max-width: 860px;
     margin: 0 auto;
   }
-  html[data-theme="dark"] body { background: #111118; color: #e0e0e8; }
-  html[data-theme="dark"] .report-header { border-bottom-color: #2a2a3a; }
-  html[data-theme="dark"] .card { background: #1a1a24; border-color: #2a2a3a; }
-  html[data-theme="dark"] table { border-color: #2a2a3a; }
-  html[data-theme="dark"] th { background: #1e1e2a; border-color: #2a2a3a; }
-  html[data-theme="dark"] td { border-color: #2a2a3a; }
-  html[data-theme="dark"] code { background: #1e1e2a; }
-  html[data-theme="dark"] .tag { background: #1e1e2a; }
-  html[data-theme="dark"] .muted { color: #888; }
-  html[data-theme="dark"] hr { border-color: #2a2a3a; }
-  @media (prefers-color-scheme: dark) {
-    html:not([data-theme="light"]) body { background: #111118; color: #e0e0e8; }
-    html:not([data-theme="light"]) .report-header { border-bottom-color: #2a2a3a; }
-    html:not([data-theme="light"]) .card { background: #1a1a24; border-color: #2a2a3a; }
-    html:not([data-theme="light"]) table { border-color: #2a2a3a; }
-    html:not([data-theme="light"]) th { background: #1e1e2a; border-color: #2a2a3a; }
-    html:not([data-theme="light"]) td { border-color: #2a2a3a; }
-    html:not([data-theme="light"]) code { background: #1e1e2a; }
-    html:not([data-theme="light"]) .tag { background: #1e1e2a; }
-    html:not([data-theme="light"]) .muted { color: #888; }
-    html:not([data-theme="light"]) hr { border-color: #2a2a3a; }
-  }
   .report-header {
-    border-bottom: 2px solid #e0e0e8;
+    border-bottom: 2px solid currentColor;
+    border-bottom-color: rgba(128,128,128,0.2);
     padding-bottom: 1rem;
     margin-bottom: 2rem;
   }
   .report-header h1 { font-size: 1.5rem; font-weight: 700; margin-bottom: 0.25rem; }
-  .report-header .meta { font-size: 0.85rem; color: #666; }
+  .report-header .meta { font-size: 0.85rem; opacity: 0.6; }
   h2 { font-size: 1.15rem; font-weight: 600; margin: 1.75rem 0 0.75rem; }
   h3 { font-size: 1rem; font-weight: 600; margin: 1.25rem 0 0.5rem; }
   .card {
-    background: #fff;
-    border: 1px solid #e0e0e8;
+    border: 1px solid rgba(128,128,128,0.2);
     border-radius: 8px;
     padding: 1rem 1.25rem;
     margin-bottom: 1rem;
   }
   table { width: 100%; border-collapse: collapse; font-size: 0.9rem; margin: 0.75rem 0; }
-  th, td { text-align: left; padding: 0.5rem 0.75rem; border: 1px solid #e0e0e8; }
-  th { background: #f4f4f8; font-weight: 600; font-size: 0.8rem; text-transform: uppercase; letter-spacing: 0.03em; }
+  th, td { text-align: left; padding: 0.5rem 0.75rem; border: 1px solid rgba(128,128,128,0.2); }
+  th { font-weight: 600; font-size: 0.8rem; text-transform: uppercase; letter-spacing: 0.03em; opacity: 0.8; }
   code {
     font-family: "SF Mono", "Fira Code", monospace;
     font-size: 0.85em;
-    background: #f0f0f4;
     padding: 0.15em 0.4em;
     border-radius: 4px;
   }
-  pre { overflow-x: auto; padding: 1rem; margin: 0.75rem 0; border-radius: 6px; background: #f4f4f8; }
-  pre code { background: none; padding: 0; }
+  pre { overflow-x: auto; padding: 1rem; margin: 0.75rem 0; border-radius: 6px; }
+  pre code { padding: 0; }
   .tag {
     display: inline-block;
     font-size: 0.75rem;
     font-weight: 600;
     padding: 0.15em 0.5em;
     border-radius: 4px;
-    background: #f0f0f4;
     text-transform: uppercase;
     letter-spacing: 0.04em;
   }
@@ -163,10 +139,10 @@ Every report starts with this wrapper. Replace `{{TITLE}}`, `{{DATE}}`, `{{PROJE
   .tag-nit { background: #e0e7ff; color: #3730a3; }
   .tag-done { background: #d1fae5; color: #065f46; }
   .tag-wip { background: #fef3c7; color: #92400e; }
-  .muted { color: #888; font-size: 0.85rem; }
+  .muted { font-size: 0.85rem; opacity: 0.6; }
   ul, ol { margin: 0.5rem 0 0.5rem 1.5rem; }
   li { margin-bottom: 0.25rem; }
-  hr { border: none; border-top: 1px solid #e0e0e8; margin: 1.5rem 0; }
+  hr { border: none; border-top: 1px solid rgba(128,128,128,0.2); margin: 1.5rem 0; }
   .summary-grid {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));

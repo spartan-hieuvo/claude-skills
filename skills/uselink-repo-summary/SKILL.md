@@ -140,6 +140,7 @@ Return the URL to the user.
 
 ## Gotchas
 
+- **NEVER set background or color on body, table, th, td, code, or pre.** uselink's viewer injects theme-adaptive CSS that handles light/dark mode automatically. Any hardcoded color in published HTML overrides the viewer's theme and forces a white background in dark mode. Only style layout (padding, margins, borders, border-radius, font-size, grid). Use `opacity` for muted text instead of `color: #888`.
 - **Remote repos need `gh` CLI.** If the user gives a GitHub URL but `gh` is not installed, fall back to `git clone` with HTTPS. If that also fails (private repo), tell the user to clone it locally first.
 - **Don't include secrets or env files in the summary.** Skip `.env`, `credentials.json`, and similar files when scanning. Never read or display their contents.
 - **Large repos need sampling.** For repos with 1000+ files, show the top-level structure and 3-5 most important modules, not every file. Use `find -maxdepth 2` and read only the key files.
